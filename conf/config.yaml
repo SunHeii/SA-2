@@ -1,0 +1,18 @@
+device: cuda
+epochs: 15
+load: false
+defaults:
+  - _self_
+  - domain: restaurant3
+  - model: SBASC
+  - environment: local
+  - optional domain_model: ${domain}_${model}
+  - ablation: none
+
+path_mapper: ${data_path}${domain.name}
+result_path_mapper: ${result_path}${domain.name}
+
+hydra:
+  output_subdir: null
+  run:
+    dir: .

@@ -1,0 +1,89 @@
+# =====================================================================
+# Step 5: 结构化配置落地 (Structured Configuration Landing)
+# =====================================================================
+name: yelp_restaurant
+
+# =====================================================================
+# Step 4: 基座模型选型与对齐 (Base Model Selection)
+# =====================================================================
+# 选用经过餐饮领域自适应预训练的 BERT-DK_rest 捕捉深层语义
+bert_mapper: /home/mysjz/mywork/Models/BERT-DK_rest
+# 选用 mpnet 作为 SBERT 映射器，确保种子词与句子在同一高质量的高维空间内对齐
+sbert_mapper: /home/mysjz/mywork/Models/all-mpnet-base-v2
+
+# =====================================================================
+# Step 1: 以终为始：定义推荐系统的特征维度 (Core Aspect Categories)
+# =====================================================================
+# 提炼出边界清晰且对推荐系统决策最有价值的 4 个核心维度
+aspect_category_mapper: ['food', 'service', 'ambience', 'price']
+
+# =====================================================================
+# Step 2: 工业级降维打击：泛化与扩充高质量方面种子词 (Aspect Seed Words)
+# =====================================================================
+# 【改造核心】：从学术版的 10 个词扩充到 25+ 个词。
+# 引入具体菜系、高频实体、场景名词，极大提升推荐系统的特征召回率。
+aspect_seed_mapper:
+  food: [
+    "food", "taste", "menu", "chicken", "burger", "pizza", "sushi", "spicy", "meal", "ingredients",
+    "steak", "salad", "pasta", "sandwich", "dessert", "drinks", "beer", "wine", "coffee", "flavor",
+    "portion", "freshness", "meat", "sauce", "dish", "breakfast", "lunch", "dinner", "appetizer"
+  ]
+  service: [
+    "service", "staff", "waiter", "waitress", "manager", "bartender", "server", "tips", "hostess", "attitude",
+    "wait", "reservation", "delivery", "host", "owner", "management", "refill", "attention", "greeting",
+    "hospitality", "speed", "communication", "recommendation", "response", "checkout"
+  ]
+  ambience: [
+    "ambience", "atmosphere", "environment", "seating", "music", "decor", "vibe", "patio", "interior", "lighting",
+    "noise", "space", "tables", "restroom", "design", "view", "crowd", "temperature", "cleanliness",
+    "vibrancy", "background", "setting", "layout", "parking", "location"
+  ]
+  price: [
+    "price", "cost", "value", "bill", "check", "bucks", "pricing", "affordable", "expensive", "cheap",
+    "worth", "charge", "deal", "money", "tip", "overpriced", "portions", "discount", "promotion",
+    "budget", "quality", "scam", "rip-off", "dimes", "penny"
+  ]
+
+# =====================================================================
+# Step 3: 情感锚定：扩充真实语境的情感极性词 (Sentiment Categories & Seeds)
+# =====================================================================
+# 【改造核心】：加入强烈的情感副词、俚语、以及真实客诉中的高频词
+sentiment_category_mapper: ['negative', 'positive']
+sentiment_seed_mapper:
+  positive: [
+    "good", "great", "nice", "excellent", "perfect", "delicious", "amazing", "friendly", "fantastic", "awesome",
+    "phenomenal", "outstanding", "recommend", "incredible", "fresh", "loved", "best", "yummy", "tasty",
+    "attentive", "impeccable", "fabulous", "superb", "beautiful", "enjoyed"
+  ]
+  negative: [
+    "bad", "terrible", "horrible", "disappointed", "awful", "rude", "overpriced", "worst", "bland", "dirty",
+    "mediocre", "cold", "slow", "unacceptable", "flavorless", "gross", "nasty", "ignored", "expensive",
+    "stale", "poor", "terrible", "sucks", "disgusting", "mess"
+  ]
+
+# ---------------------------------------------------------------------
+# 模型控制与超参数设置 (Hyperparameters & Thresholds)
+# ---------------------------------------------------------------------
+# 设置置信度阈值：低于该阈值的伪标签将被丢弃，保证训练数据的纯净度
+cat_threshold: 0.35
+pol_threshold: 0.35
+
+# 验证集切分（针对弱监督生成的伪标签）
+validation_data_size: 100
+hyper_validation_size: 0.8
+
+# CASC 备用参数（如需启用其他变体模型时使用）
+N: 5
+M: 800
+# 权重在此可以设为均等或根据 Yelp 词频微调，纯抽取场景影响不大
+aspect_weights: [100, 100, 100, 100]
+sentiment_weights: [100, 100]
+
+# 优化器与 Focal Loss 参数
+params:
+  learning_rate: 1e-5
+  beta1: 0.97
+  beta2: 0.999
+  batch_size: 16
+  gamma1: 4
+  gamma2: 4

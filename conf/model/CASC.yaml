@@ -1,0 +1,9 @@
+name: CASC
+K_1: 10
+K_2: 30
+lambda_threshold: 0.5
+batch_size: 6
+validation_data_size: 100
+learning_rate: 1e-5
+beta1: 0.9
+beta2: 0.999

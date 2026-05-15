@@ -1,0 +1,6 @@
+# @package _global_
+domain:
+  bert_mapper: bert-base-uncased
+
+ablation:
+    name: WithoutDomainKnowledge

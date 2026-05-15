@@ -1,0 +1,5 @@
+[2026-05-12 09:09:34,531][sentence_transformers.SentenceTransformer][INFO] - Load pretrained SentenceTransformer: /home/mysjz/mywork/Models/all-mpnet-base-v2
+[2026-05-12 09:49:25,784][sentence_transformers.SentenceTransformer][INFO] - Load pretrained SentenceTransformer: /home/mysjz/mywork/Models/all-mpnet-base-v2
+[2026-05-12 10:12:22,036][sentence_transformers.SentenceTransformer][INFO] - Load pretrained SentenceTransformer: /home/mysjz/mywork/Models/all-mpnet-base-v2
+[2026-05-12 14:11:47,813][sentence_transformers.SentenceTransformer][INFO] - Load pretrained SentenceTransformer: /home/mysjz/mywork/Models/all-mpnet-base-v2
+[2026-05-12 16:53:04,856][sentence_transformers.SentenceTransformer][INFO] - Load pretrained SentenceTransformer: /home/mysjz/mywork/Models/all-mpnet-base-v2

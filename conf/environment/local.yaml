@@ -1,0 +1,8 @@
+# @package _global_
+base_path: ''
+data_path: './data/'
+result_path: './results/'
+
+domain:
+  params:
+    batch_size: 12

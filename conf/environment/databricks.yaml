@@ -1,0 +1,5 @@
+# @package _global_
+
+base_path: '/dbfs/FileStore/kto/'
+data_path: '/dbfs/FileStore/kto/'
+result_path: '/dbfs/FileStore/kto/results/'

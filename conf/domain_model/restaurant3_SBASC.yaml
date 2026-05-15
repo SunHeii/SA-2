@@ -1,0 +1,52 @@
+# @package _global_
+domain:
+  cat_threshold: 0.7
+  pol_threshold: 0.5
+
+  aspect_seed_mapper:
+    food: [
+      "really good food and always have decent drink_specials .",
+      "this is the best sushi buffet we ever had ",
+      "the pizza at old chicago is actually pretty good",
+      "hamburgers bland and buns dry and cold .",
+      "the drinks were amazing as well , my husband and i will definitely be coming back !",
+    ]
+    place: [
+      "great place to chill and enjoy some alone time with a cool ambience about the place !",
+      "butterfields is a great environment and atmosphere with waffles on the ceiling , great neighborhood",
+      "seating is limited-call ahead for a large_group . decor is updated and modern-will definitely be back again and again ",
+      "this place is a total dump .",
+      "the views and surroundings were spectacular . "
+    ]
+    service: [
+      "the owner and staff are very friendly and communicative",
+      "our server was rude , slow and snapped her fingers when we needed water # # # refills",
+      "the service was extremely good as our water cups rarely ran low and the manager was very helpful in getting the bill comped .",
+      "and the service is by far the worst i 've ever experienced",
+      "the service is very good and the servers are very nice . i brought my sorority sisters to celebrate a bachelorette and the food was served quickly .",
+      "the waitresses were friendly and attentive to our questions/comments ."
+    ]
+
+  sentiment_seed_mapper:
+    positive: [
+      "service was great",
+      "every bite was super tender and the bun was nice and fresh",
+      "friendly staff and warm ambiance",
+      "we also ordered pita and hummus and that was delicious",
+      "i really loved everything about it",
+    ]
+    negative: [
+      "i 'm sad to say i ca n't find anything positive to say about the experience",
+      "the service over the past year is terrible",
+      "any day of the week it 's bad",
+      "horrible food . wretched service . vastly overpriced . i would rather starve than eat here again .",
+      "horrible , over priced food",
+    ]
+
+    params:
+      batch_size: 12
+      learning_rate: 1e-6
+      beta1: 0.9
+      beta2: 0.95
+      gamma1: 4
+      gamma2: 4
